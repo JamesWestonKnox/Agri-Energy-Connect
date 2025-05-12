@@ -1,0 +1,31 @@
+﻿@model Agri_Energy_Connect.Models.AddFarmerModel
+@{
+    ViewData["Title"] = "Add Farmer";
+}
+
+
+<h2>Add Farmer</h2>
+
+<form asp-action="AddFarmer" method="post">
+    <div class="form-group">
+        <label>First Name</label>
+        <input asp-for="FirstName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Last Name</label>
+        <input asp-for="LastName" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Email</label>
+        <input asp-for="Email" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Username</label>
+        <input asp-for="Username" class="form-control" />
+    </div>
+    <div class="form-group">
+        <label>Password</label>
+        <input asp-for="Password" class="form-control" type="password" />
+    </div>
+    <button type="submit" class="btn btn-success mt-3">Create Farmer</button>
+</form>

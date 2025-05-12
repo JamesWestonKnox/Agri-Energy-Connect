@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Agri_Energy_Connect.Models.Farmer>
+@{
+    ViewData["Title"] = "Farmers";
+}
+
+<h2>Farmers</h2>
+
+<a class="btn btn-primary mb-3" href="/Employee/AddFarmer">Add New Farmer</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Email</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model == null || !Model.Any())
+        {
+            <tr><td colspan="3">No farmers found.</td></tr>
+        }
+        else
+        {
+            foreach (var farmer in Model)
+            {
+                <tr>
+                    <td>@farmer.FirstName @farmer.LastName</td>
+                    <td>@farmer.Email</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
