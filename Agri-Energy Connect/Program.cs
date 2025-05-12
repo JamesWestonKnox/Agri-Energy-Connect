@@ -1,6 +1,14 @@
+using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.Extensions.DependencyInjection;
+using Agri_Energy_Connect.Data;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container.
+builder.Services.AddDbContext<AppDbContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection")));
+
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
