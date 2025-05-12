@@ -39,7 +39,15 @@ namespace Agri_Energy_Connect.Controllers
                         HttpContext.Session.SetInt32("UserId", user.UserId);
                         HttpContext.Session.SetString("Username", user.Username);
                         HttpContext.Session.SetString("Role", user.Role);
-                        return RedirectToAction("Index", "Home");
+
+                        if (user.Role == "Employee")
+                        {
+                            return RedirectToAction("EmployeeDashboard", "Employee");
+                        }
+                        else if (user.Role == "Farmer")
+                        {
+                            return RedirectToAction("FarmerDashboard", "Farmer");
+                        }
                     }
                 }
                 else
