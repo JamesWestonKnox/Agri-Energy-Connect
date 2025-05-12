@@ -48,5 +48,12 @@ namespace Agri_Energy_Connect.Controllers
             }
             return View(model);
         }
+
+        [HttpGet]
+        public IActionResult Logout()
+        {
+            HttpContext.Session.Clear();
+            return RedirectToAction("Login");
+        }
     }
 }

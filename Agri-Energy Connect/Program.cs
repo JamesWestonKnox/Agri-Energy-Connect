@@ -21,6 +21,17 @@ builder.Services.AddSession(options =>
 
 var app = builder.Build();
 
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var context = services.GetRequiredService<AppDbContext>();
+    var passwordService = services.GetRequiredService<PasswordService>();
+
+    // Call the initializer to seed data
+    DataInitializer.Initialize(context, passwordService);
+}
+
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
