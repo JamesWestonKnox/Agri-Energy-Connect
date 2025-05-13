@@ -8,6 +8,7 @@
         public string Category { get; set; }
         public string Description { get; set; }
         public DateTime ProductionDate { get; set; }
+        public Double Price { get; set; }
         public int FarmerId { get; set; }
         public Farmer Farmer { get; set; }
     }
