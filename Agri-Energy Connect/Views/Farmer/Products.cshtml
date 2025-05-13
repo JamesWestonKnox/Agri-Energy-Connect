@@ -1,5 +1,33 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
+﻿@model IEnumerable<Agri_Energy_Connect.Models.Product>
 @{
+    ViewData["Title"] = "Products";
 }
+
+<h2>My Products</h2>
+
+<a href="/Farmer/AddProduct" class="btn btn-primary mb-3">Add New Product</a>
+
+<table class="table table-bordered">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Description</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (!Model.Any())
+        {
+            <tr><td colspan="2">No products found.</td></tr>
+        }
+        else
+        {
+            foreach (var product in Model)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>

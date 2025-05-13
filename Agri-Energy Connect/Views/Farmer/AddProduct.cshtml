@@ -1,0 +1,48 @@
+﻿@model Agri_Energy_Connect.Models.Product
+@{
+    ViewData["Title"] = "Add Product";
+    var categories = new List<string> { "Vegetables", "Fruits", "Grains", "Livestock", "Dairy" };
+}
+
+<h2>Add Product</h2>
+
+<form asp-action="AddProduct" method="post">
+    <div class="form-group">
+        <label>Product Name</label>
+        <input asp-for="Name" class="form-control" />
+    </div>
+
+    <div class="form-group">
+        <label>Category</label>
+        <select asp-for="Category" class="form-control">
+            <option value="">-- Select Category --</option>
+            @foreach (var category in categories)
+            {
+                <option value="@category">@category</option>
+            }
+        </select>
+        <span asp-validation-for="Category" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+        <span asp-validation-for="Description" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label>Production Date</label>
+        <input asp-for="ProductionDate" class="form-control" type="date" />
+        <span asp-validation-for="ProductionDate" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label>Price (R)</label>
+        <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" />
+        <span asp-validation-for="Price" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-success mt-3">Add Product</button>
+</form>
+    
+
+
