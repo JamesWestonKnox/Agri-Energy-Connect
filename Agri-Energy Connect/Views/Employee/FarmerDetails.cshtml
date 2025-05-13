@@ -1,0 +1,33 @@
+﻿@model Agri_Energy_Connect.Models.Farmer
+@{
+    ViewData["Title"] = "Farmer Details";
+}
+
+<h2>@Model.FirstName @Model.LastName's Profile</h2>
+<p><strong>Email:</strong> @Model.Email</p>
+
+<h4>Products</h4>
+@if (Model.Products != null && Model.Products.Any())
+{
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var product in Model.Products)
+            {
+                <tr>
+                    <td>@product.Name</td>
+                    <td>@product.Description</td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No products found for this farmer.</p>
+}

@@ -33,13 +33,28 @@ namespace Agri_Energy_Connect.Controllers
         public IActionResult Farmers()
         {
             var farmers = _context.Farmers.ToList();
-            return View();
+            return View(farmers);
         }
 
         [HttpGet]
         public IActionResult AddFarmer()
         {
             return View();
+        }
+        
+        [HttpGet]
+        public IActionResult FarmerDetails(int id)
+        {
+            var farmer = _context.Farmers
+                .Include(f => f.Products)
+                .FirstOrDefault(f => f.FarmerId == id);
+
+            if (farmer == null)
+            {
+                return NotFound();
+            }
+
+            return View(farmer);
         }
 
         [HttpPost]
