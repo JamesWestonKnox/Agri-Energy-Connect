@@ -3,36 +3,50 @@
     ViewData["Title"] = "Farmers";
 }
 
-<h2>Farmers</h2>
+<div class="container py-5">
+    <div class="text-center mb-5 pb-3">
+        <h1 class="display-4">Farmer Profiles</h1>
+    </div>
 
-<a class="btn btn-primary mb-3" href="/Employee/AddFarmer">Add New Farmer</a>
+    <div class="mb-4 text-end">
+        <a class="btn btn-primary" href="/Employee/AddFarmer">Add New Farmer</a>
+    </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Farmer ID</th>
-            <th>Name</th>
-            <th>Email</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (Model == null || !Model.Any())
-        {
-            <tr><td colspan="3">No farmers found.</td></tr>
-        }
-        else
-        {
-            foreach (var farmer in Model)
-            {
-                <tr>
-                    <td>@farmer.FarmerId</td>
-                    <td>@farmer.FirstName @farmer.LastName</td>
-                    <td>@farmer.Email</td>
-                    <td>
-                        <a class="btn btn-primary mb-3" href="/Employee/FarmerDetails/@farmer.FarmerId">View Profile</a>
-                    </td>
-                </tr>
-            }
-        }
-    </tbody>
-</table>
+    <div class="card shadow">
+        <div class="card-body">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>Farmer ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model == null || !Model.Any())
+                    {
+                        <tr>
+                            <td colspan="4" class="text-center">No farmers found.</td>
+                        </tr>
+                    }
+                    else
+                    {
+                        foreach (var farmer in Model)
+                        {
+                            <tr>
+                                <td>@farmer.FarmerId</td>
+                                <td>@farmer.FirstName @farmer.LastName</td>
+                                <td>@farmer.Email</td>
+                                <td>
+                                    <a class="btn btn-sm btn-primary" href="/Employee/FarmerDetails/@farmer.FarmerId">View Profile</a>
+                                </td>
+                            </tr>
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+

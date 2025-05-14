@@ -1,48 +1,63 @@
 ﻿@model Agri_Energy_Connect.Models.Product
 @{
     ViewData["Title"] = "Add Product";
-    var categories = new List<string> { "Vegetables", "Fruits", "Grains", "Livestock", "Dairy" };
+    var categories = new List<string> { "Solar energy", "Wind energy", "Bio energy", "Electric machinery", "Sustainable farming materials" };
 }
 
-<h2>Add Product</h2>
-
-<form asp-action="AddProduct" method="post">
-    <div class="form-group">
-        <label>Product Name</label>
-        <input asp-for="Name" class="form-control" />
+<div class="container py-5">
+    <div class="text-center mb-5 pb-3">
+        <h1 class="display-4">Add Product</h1>
     </div>
 
-    <div class="form-group">
-        <label>Category</label>
-        <select asp-for="Category" class="form-control">
-            <option value="">-- Select Category --</option>
-            @foreach (var category in categories)
-            {
-                <option value="@category">@category</option>
-            }
-        </select>
-        <span asp-validation-for="Category" class="text-danger"></span>
-    </div>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card shadow">
+                <div class="card-body">
+                    <form asp-action="AddProduct" method="post">
+                        <div class="form-group mb-3">
+                            <label>Product Name</label>
+                            <input asp-for="Name" class="form-control" />
+                            <span asp-validation-for="Name" class="text-danger"></span>
+                        </div>
 
-    <div class="form-group">
-        <label>Description</label>
-        <textarea asp-for="Description" class="form-control" rows="4"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
-    </div>
+                        <div class="form-group mb-3">
+                            <label>Category</label>
+                            <select asp-for="Category" class="form-control">
+                                <option value="">-- Select Category --</option>
+                                @foreach (var category in categories)
+                                {
+                                    <option value="@category">@category</option>
+                                }
+                            </select>
+                            <span asp-validation-for="Category" class="text-danger"></span>
+                        </div>
 
-    <div class="form-group">
-        <label>Production Date</label>
-        <input asp-for="ProductionDate" class="form-control" type="date" />
-        <span asp-validation-for="ProductionDate" class="text-danger"></span>
-    </div>
-    <div class="form-group">
-        <label>Price (R)</label>
-        <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" />
-        <span asp-validation-for="Price" class="text-danger"></span>
-    </div>
+                        <div class="form-group mb-3">
+                            <label>Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <span asp-validation-for="Description" class="text-danger"></span>
+                        </div>
 
-    <button type="submit" class="btn btn-success mt-3">Add Product</button>
-</form>
-    
+                        <div class="form-group mb-3">
+                            <label>Production Date</label>
+                            <input asp-for="ProductionDate" class="form-control" type="date" />
+                            <span asp-validation-for="ProductionDate" class="text-danger"></span>
+                        </div>
+
+                        <div class="form-group mb-3">
+                            <label>Price (R)</label>
+                            <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" />
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+
+                        <div class="text-end">
+                            <button type="submit" class="btn btn-primary">Add Product</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 

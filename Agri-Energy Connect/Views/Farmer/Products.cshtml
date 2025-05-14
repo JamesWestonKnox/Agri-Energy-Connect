@@ -3,40 +3,47 @@
     ViewData["Title"] = "Your Products";
 }
 
-<h2>My Products</h2>
+<div class="container py-5">
+    <div class="text-center mb-5 pb-3">
+        <h1 class="display-4">My Products</h1>
+    </div>
 
-<a href="/Farmer/AddProduct" class="btn btn-primary mb-3">Add New Product</a>
+    <div class="mb-4 text-end">
+        <a class="btn btn-primary" href="/Farmer/AddProduct">Add New Product</a>
+    </div>
 
-<table class="table table-bordered">
-    <thead>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Description</th>
-            <th>Production Date</th>
-            <th>Price</th>
-        </tr>
-    </thead>
-    <tbody>
-        @if (!Model.Any())
-        {
-            <tr><td colspan="2">No products found.</td></tr>
-        }
-        else
-        {
-            foreach (var product in Model)
+    <div class="card shadow">
+        <div class="card-body">
+            @if (!Model.Any())
             {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>@product.Category</td>
-                    <td>@product.Description</td>
-                    <td>@product.ProductionDate.ToLongDateString()</td>
-                    <td>R @product.Price</td>
-                    <td>
-                        <a class="btn btn-primary mb-3" href="/Farmer/EditProduct/@product.ProductId">Edit Product</a>
-                    </td>
-                </tr>
+                <p>No products found.</p>
             }
-        }
-    </tbody>
-</table>
+            else
+            {
+                <table class="table table-bordered table-striped">
+                    <thead>
+                        <tr>
+                            <th>Name</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Production Date</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model)
+                        {
+                            <tr>
+                                <td>@product.Name</td>
+                                <td>@product.Category</td>
+                                <td>@product.Description</td>
+                                <td>@product.ProductionDate.ToLongDateString()</td>
+                                <td>R @product.Price.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+            }
+        </div>
+    </div>
+</div>

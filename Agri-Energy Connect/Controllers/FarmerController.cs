@@ -2,7 +2,6 @@
 using Agri_Energy_Connect.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Agri_Energy_Connect.Controllers
 {
@@ -39,7 +38,7 @@ namespace Agri_Energy_Connect.Controllers
         }
 
         [HttpGet]
-        public IActionResult Marketplace() 
+        public IActionResult Marketplace()
         {
             return View();
         }
@@ -50,22 +49,9 @@ namespace Agri_Energy_Connect.Controllers
             return View();
         }
 
-        [HttpGet]
-        public IActionResult EditProduct(int id)
-        {
-            var product = _context.Products
-                .FirstOrDefault(p => p.ProductId  == id);
-
-            if (product == null)
-            {
-                return NotFound();
-            }
-
-            return View(product);
-        }
 
         [HttpPost]
-        public IActionResult AddProduct(AddProductModel model) 
+        public IActionResult AddProduct(AddProductModel model)
         {
             if (ModelState.IsValid)
             {

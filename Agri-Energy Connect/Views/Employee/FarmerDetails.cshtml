@@ -3,31 +3,72 @@
     ViewData["Title"] = "Farmer Details";
 }
 
-<h2>@Model.FirstName @Model.LastName's Profile</h2>
-<p><strong>Email:</strong> @Model.Email</p>
+<div class="container py-5">
+    <div class="text-center mb-5 pb-3">
+        <h1 class="display-4">@Model.FirstName @Model.LastName's Profile</h1>
+    </div>
 
-<h4>Products</h4>
-@if (Model.Products != null && Model.Products.Any())
-{
-    <table class="table table-striped">
-        <thead>
-            <tr>
-                <th>Product Name</th>
-                <th>Description</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var product in Model.Products)
+    <div class="card shadow mb-4">
+        <div class="card-body">
+            <div class="text-center mb-3">
+                <h4>Farmer Details</h4>
+            </div>
+            <div class="row text-center">
+                <div class="col-md-3">
+                    <strong>Farmer ID:</strong><br />
+                    @Model.FarmerId
+                </div>
+                <div class="col-md-3">
+                    <strong>Email:</strong><br />
+                    @Model.Email
+                </div>
+                <div class="col-md-3">
+                    <strong>First Name:</strong><br />
+                    @Model.FirstName
+                </div>
+                <div class="col-md-3">
+                    <strong>Last Name:</strong><br />
+                    @Model.LastName
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="card shadow">
+        <div class="card-body">
+            <div class="text-center">
+                <h4 class="mb-3">Products</h4>
+            </div>
+            @if (Model.Products != null && Model.Products.Any())
             {
-                <tr>
-                    <td>@product.Name</td>
-                    <td>@product.Description</td>
-                </tr>
+                <table class="table table-striped">
+                    <thead>
+                        <tr>
+                            <th>Product Name</th>
+                            <th>Category</th>
+                            <th>Description</th>
+                            <th>Production Date</th>
+                            <th>Price</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var product in Model.Products)
+                        {
+                            <tr>
+                                <td>@product.Name</td>
+                                <td>@product.Category</td>
+                                <td>@product.Description</td>
+                                <td>@product.ProductionDate.ToString("yyyy-MM-dd")</td>
+                                <td>R @product.Price.ToString("N2")</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
             }
-        </tbody>
-    </table>
-}
-else
-{
-    <p>No products found for this farmer.</p>
-}
+            else
+            {
+                <p>No products found for this farmer.</p>
+            }
+        </div>
+    </div>
+</div>
