@@ -1,7 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Agri_Energy_Connect.Data;
 using Agri_Energy_Connect.Models;
-using Agri_Energy_Connect.Data;
 using Agri_Energy_Connect.Services;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Agri_Energy_Connect.Controllers
 {
@@ -33,7 +33,7 @@ namespace Agri_Energy_Connect.Controllers
                 {
                     bool isPasswordValid = _passwordService.VerifyPassword(user.PasswordHash, model.Password);
 
-                    if (isPasswordValid) 
+                    if (isPasswordValid)
                     {
                         HttpContext.Session.SetInt32("UserId", user.UserId);
                         HttpContext.Session.SetString("Username", user.Username);
@@ -48,12 +48,17 @@ namespace Agri_Energy_Connect.Controllers
                             return RedirectToAction("FarmerDashboard", "Farmer");
                         }
                     }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, "Incorrect password. Please try again.");
+                    }
                 }
                 else
                 {
-                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    ModelState.AddModelError(string.Empty, "Username not found. Please check and try again.");
                 }
             }
+
             return View(model);
         }
 
