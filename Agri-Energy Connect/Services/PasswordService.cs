@@ -1,9 +1,7 @@
 ﻿// Summary
 //----------------------------------------------------
-// AccountController.cs
-// Handles user login and logout functionality.
-// Routes users based on role (Employee or Farmer).
-// Depends on: AppDbContext, PasswordService, Session
+// Password service is used to create password hash values and verfiy them against inputted values
+// Assistance provided by ChatGPT, OpenAI (2025). https://chat.openai.com
 // ---------------------------------------------------
 
 using Microsoft.AspNetCore.Identity;

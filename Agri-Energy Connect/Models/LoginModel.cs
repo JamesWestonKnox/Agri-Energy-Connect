@@ -1,9 +1,7 @@
 ﻿// Summary
 //----------------------------------------------------
-// AccountController.cs
-// Handles user login and logout functionality.
-// Routes users based on role (Employee or Farmer).
-// Depends on: AppDbContext, PasswordService, Session
+//LoginModel is used to collect user input for logging in
+// Assistance provided by ChatGPT, OpenAI (2025). https://chat.openai.com
 // ---------------------------------------------------
 
 using System.ComponentModel.DataAnnotations;

@@ -1,9 +1,7 @@
 ﻿// Summary
 //----------------------------------------------------
-// AccountController.cs
-// Handles user login and logout functionality.
-// Routes users based on role (Employee or Farmer).
-// Depends on: AppDbContext, PasswordService, Session
+//Product is used to represent the product entity
+// Assistance provided by ChatGPT, OpenAI (2025). https://chat.openai.com
 // ---------------------------------------------------
 
 namespace Agri_Energy_Connect.Models

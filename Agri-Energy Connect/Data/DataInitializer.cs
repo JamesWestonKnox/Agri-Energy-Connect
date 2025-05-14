@@ -1,9 +1,6 @@
 ﻿// Summary
 //----------------------------------------------------
-// AccountController.cs
-// Handles user login and logout functionality.
-// Routes users based on role (Employee or Farmer).
-// Depends on: AppDbContext, PasswordService, Session
+//DataInitializer is used to seed default data into the database
 // ---------------------------------------------------
 
 using Agri_Energy_Connect.Models;
@@ -17,6 +14,7 @@ namespace Agri_Energy_Connect.Data
         {
             if (!context.Users.Any())
             {
+                //Creates default employee user
                 var defaultEmployee = new User
                 {
                     Username = "Emp1",
@@ -24,6 +22,7 @@ namespace Agri_Energy_Connect.Data
                     Role = "Employee"
                 };
 
+                //Saves to database
                 context.Users.Add(defaultEmployee);
                 context.SaveChanges();
             }

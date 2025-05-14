@@ -1,9 +1,8 @@
 ﻿// Summary
 //----------------------------------------------------
-// AccountController.cs
-// Handles user login and logout functionality.
-// Routes users based on role (Employee or Farmer).
-// Depends on: AppDbContext, PasswordService, Session
+// Far,er Controller handles functionality for farmer role
+// View marketplace products and view and create own products
+// Assistance provided by ChatGPT, OpenAI (2025). https://chat.openai.com
 // ---------------------------------------------------
 
 using Agri_Energy_Connect.Data;
@@ -15,8 +14,9 @@ namespace Agri_Energy_Connect.Controllers
 {
     public class FarmerController : Controller
     {
-        private readonly AppDbContext _context;
+        private readonly AppDbContext _context; //Context for database access
 
+        //Initializes controller with database context
         public FarmerController(AppDbContext context)
         {
             _context = context;
@@ -25,14 +25,17 @@ namespace Agri_Energy_Connect.Controllers
         [HttpGet]
         public IActionResult FarmerDashboard()
         {
+            //Returns FarmerDashboard view
             return View();
         }
 
         [HttpGet]
         public IActionResult Products()
         {
+            //Retrieves userID from session context
             var userId = HttpContext.Session.GetInt32("UserId");
 
+            //Retrieves farmer and products from datbasee
             var farmer = _context.Farmers
                 .Include(f => f.Products)
                 .FirstOrDefault(f => f.UserId == userId);
@@ -42,31 +45,38 @@ namespace Agri_Energy_Connect.Controllers
                 return NotFound("Farmer not found for this user.");
             }
 
+            //Pass products to view
             return View(farmer.Products.ToList());
         }
 
         [HttpGet]
         public IActionResult Marketplace(ProductFilterModel filter)
         {
+            //Retrieve all products from database
             var products = _context.Products.AsQueryable();
 
+            // Apply filter by category
             if (!string.IsNullOrEmpty(filter.SelectedCategory))
             {
                 products = products.Where(p => p.Category == filter.SelectedCategory);
             }
 
+            //Apply filter by start date
             if (filter.StartDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate >= filter.StartDate.Value);
             }
 
+            //Apply filter by end date
             if (filter.EndDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate <= filter.EndDate.Value);
             }
 
+            // Include farmer data in the query results
             var filteredProducts = products.Include(p => p.Farmer).ToList();
 
+            // Return view with filtered product list
             filter.Products = filteredProducts;
             return View(filter);
         }
@@ -74,6 +84,7 @@ namespace Agri_Energy_Connect.Controllers
         [HttpGet]
         public IActionResult AddProduct()
         {
+            //Returns AddProduct view
             return View();
         }
 
@@ -81,8 +92,10 @@ namespace Agri_Energy_Connect.Controllers
         [HttpPost]
         public IActionResult AddProduct(AddProductModel model)
         {
+            // Ensure form input is valid
             if (ModelState.IsValid)
             {
+                // Retrieve current user from session
                 var userId = HttpContext.Session.GetInt32("UserId");
                 if (userId == null)
                 {
@@ -90,6 +103,7 @@ namespace Agri_Energy_Connect.Controllers
                     return RedirectToAction("Login", "Account");
                 }
 
+                //Retrieve farmer using session userID
                 var farmer = _context.Farmers.FirstOrDefault(f => f.UserId == userId);
                 if (farmer == null)
                 {
@@ -97,6 +111,7 @@ namespace Agri_Energy_Connect.Controllers
                     return View(model);
                 }
 
+                //Create new product entry
                 var product = new Product
                 {
                     Name = model.Name,
@@ -107,19 +122,16 @@ namespace Agri_Energy_Connect.Controllers
                     FarmerId = farmer.FarmerId
                 };
 
+                //Save changes to database
                 _context.Products.Add(product);
                 _context.SaveChanges();
 
-                TempData["Success"] = "Product added successfully.";
+                // Redirect to products page
                 return RedirectToAction("Products");
             }
             else
             {
-                foreach (var error in ModelState.Values.SelectMany(v => v.Errors))
-                {
-                    Console.WriteLine(error.ErrorMessage);
-                }
-
+                // Return the view with appropiate errors
                 return View(model);
             }
         }

@@ -1,9 +1,8 @@
 ﻿// Summary
 //----------------------------------------------------
-// AccountController.cs
-// Handles user login and logout functionality.
-// Routes users based on role (Employee or Farmer).
-// Depends on: AppDbContext, PasswordService, Session
+// Employee Controller handles functionality for employee role
+// Managing farmers and viewing and filtering products
+// Assistance provided by ChatGPT, OpenAI (2025). https://chat.openai.com
 // ---------------------------------------------------
 
 using Agri_Energy_Connect.Data;
@@ -16,9 +15,10 @@ namespace Agri_Energy_Connect.Controllers
 {
     public class EmployeeController : Controller
     {
-        private readonly AppDbContext _context;
-        private readonly PasswordService _passwordService;
+        private readonly AppDbContext _context; //Context for database access
+        private readonly PasswordService _passwordService; //Used to access password hash and verification functions
 
+        //Initializes controller with context and password service
         public EmployeeController(AppDbContext context, PasswordService passwordService)
         {
             _context = context;
@@ -28,31 +28,38 @@ namespace Agri_Energy_Connect.Controllers
         [HttpGet]
         public IActionResult EmployeeDashboard()
         {
+            //Returns EmployeeDashboard view
             return View();
         }
 
         [HttpGet]
         public IActionResult Products(ProductFilterModel filter)
         {
+            // Get products from database
             var products = _context.Products.AsQueryable();
 
+            // Apply filter by category
             if (!string.IsNullOrEmpty(filter.SelectedCategory))
             {
                 products = products.Where(p => p.Category == filter.SelectedCategory);
             }
 
+            //Apply filter by start date
             if (filter.StartDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate >= filter.StartDate.Value);
             }
 
+            //Apply filter by end date
             if (filter.EndDate.HasValue)
             {
                 products = products.Where(p => p.ProductionDate <= filter.EndDate.Value);
             }
 
+            // Include farmer data in the query results
             var filteredProducts = products.Include(p => p.Farmer).ToList();
 
+            // Return view with filtered product list
             filter.Products = filteredProducts;
             return View(filter);
         }
@@ -60,6 +67,7 @@ namespace Agri_Energy_Connect.Controllers
         [HttpGet]
         public IActionResult Farmers()
         {
+            // Display all farmers
             var farmers = _context.Farmers.ToList();
             return View(farmers);
         }
@@ -67,12 +75,14 @@ namespace Agri_Energy_Connect.Controllers
         [HttpGet]
         public IActionResult AddFarmer()
         {
+            //Returns AddFarmer view
             return View();
         }
 
         [HttpGet]
         public IActionResult FarmerDetails(int id)
         {
+            // Display a specific farmer and their products
             var farmer = _context.Farmers
                 .Include(f => f.Products)
                 .FirstOrDefault(f => f.FarmerId == id);
@@ -82,14 +92,17 @@ namespace Agri_Energy_Connect.Controllers
                 return NotFound();
             }
 
+            // Return view with farmer information
             return View(farmer);
         }
 
         [HttpPost]
         public IActionResult AddFarmer(AddFarmerModel model)
         {
+            // Check if form data is valid
             if (ModelState.IsValid)
             {
+                // Check for existing user
                 var existingUser = _context.Users.FirstOrDefault(u => u.Username == model.Username);
                 if (existingUser != null)
                 {
@@ -97,6 +110,7 @@ namespace Agri_Energy_Connect.Controllers
                     return View(model);
                 }
 
+                // Creates new user with Farmer role
                 var user = new User
                 {
                     Username = model.Username,
@@ -106,6 +120,7 @@ namespace Agri_Energy_Connect.Controllers
                 _context.Users.Add(user);
                 _context.SaveChanges();
 
+                // Creates a new farmer linked to userID
                 var farmer = new Farmer
                 {
                     FirstName = model.FirstName,
@@ -114,13 +129,15 @@ namespace Agri_Energy_Connect.Controllers
                     UserId = user.UserId
                 };
 
+                // Saves changes
                 _context.Farmers.Add(farmer);
                 _context.SaveChanges();
 
-                TempData["Success"] = "Farmer account created successfully.";
+                // Redirect to farmers page
                 return RedirectToAction("Farmers");
             }
 
+            //If  form fails return to view with appropiate error messages
             return View(model);
         }
     }
