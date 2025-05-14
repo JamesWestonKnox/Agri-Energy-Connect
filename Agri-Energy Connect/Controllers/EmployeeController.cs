@@ -43,7 +43,7 @@ namespace Agri_Energy_Connect.Controllers
                 products = products.Where(p => p.ProductionDate <= filter.EndDate.Value);
             }
 
-            var filteredProducts = products.ToList();
+            var filteredProducts = products.Include(p => p.Farmer).ToList();
 
             filter.Products = filteredProducts;
             return View(filter);
@@ -61,7 +61,7 @@ namespace Agri_Energy_Connect.Controllers
         {
             return View();
         }
-        
+
         [HttpGet]
         public IActionResult FarmerDetails(int id)
         {

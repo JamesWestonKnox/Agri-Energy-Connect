@@ -38,9 +38,29 @@ namespace Agri_Energy_Connect.Controllers
         }
 
         [HttpGet]
-        public IActionResult Marketplace()
+        public IActionResult Marketplace(ProductFilterModel filter)
         {
-            return View();
+            var products = _context.Products.AsQueryable();
+
+            if (!string.IsNullOrEmpty(filter.SelectedCategory))
+            {
+                products = products.Where(p => p.Category == filter.SelectedCategory);
+            }
+
+            if (filter.StartDate.HasValue)
+            {
+                products = products.Where(p => p.ProductionDate >= filter.StartDate.Value);
+            }
+
+            if (filter.EndDate.HasValue)
+            {
+                products = products.Where(p => p.ProductionDate <= filter.EndDate.Value);
+            }
+
+            var filteredProducts = products.ToList();
+
+            filter.Products = filteredProducts;
+            return View(filter);
         }
 
         [HttpGet]
