@@ -1,27 +1,43 @@
 ﻿@model Agri_Energy_Connect.Models.LoginModel
-
 @{
     ViewData["Title"] = "Login Page";
 }
+<div class="text-center mt-4 mb-4">
+    <h1 class="display-4">Welcome to Agri-Energy Connect</h1>
+    <p class="lead">Please login to use our platform</p>
+</div>
+<div class="row justify-content-center align-items-center min-vh-60">
+    <div class="col-md-6 col-lg-4">
+        <div class="card shadow">
+            <div class="card-body p-4">
+                <h2 class="text-center mb-4">Login</h2>
+                <form method="post">
+                    <div class="form-group mb-3">
+                        <label for="Username">Username</label>
+                        <input type="text" value="Emp1" class="form-control" id="Username" name="Username" required />
+                    </div>
+                    <div class="form-group mb-3">
+                        <label for="Password">Password</label>
+                        <input type="password" value="password" class="form-control" id="Password" name="Password" required />
+                    </div>
+                    <div class="d-grid">
+                        <button type="submit" class="btn btn-primary">Login</button>
+                    </div>
+                </form>
 
-<h2>Login</h2>
+                @if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
+                {
+                        <div class="alert alert-danger mt-3">
+                        @ViewData["ErrorMessage"]
+                        </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
 
-<form method="post">
-    <div class="form-group">
-        <label for="Username">Username</label>
-        <input type="text" value ="Emp1" class="form-control" id="Username" name="Username" required />
- 
-    </div>
-    <div class="form-group">
-        <label for="Password">Password</label>
-        <input type="password" value="password" class="form-control" id="Password" name="Password" required />
-    </div>
-    <button type="submit" class="btn btn-primary">Login</button>
-</form>
-
-@if (!string.IsNullOrEmpty(ViewData["ErrorMessage"] as string))
-{
-    <div class="alert alert-danger mt-3">
-        @ViewData["ErrorMessage"]
-    </div>
-}
+<style>
+    .min-vh-75 {
+        min-height: 75vh;
+    }
+</style>
