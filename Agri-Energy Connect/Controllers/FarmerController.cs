@@ -1,6 +1,5 @@
 ﻿using Agri_Energy_Connect.Data;
 using Agri_Energy_Connect.Models;
-using Agri_Energy_Connect.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
@@ -42,6 +41,20 @@ namespace Agri_Energy_Connect.Controllers
         public IActionResult AddProduct()
         {
             return View();
+        }
+
+        [HttpGet]
+        public IActionResult EditProduct(int id)
+        {
+            var product = _context.Products
+                .FirstOrDefault(p => p.ProductId  == id);
+
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            return View(product);
         }
 
         [HttpPost]

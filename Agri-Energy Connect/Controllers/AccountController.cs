@@ -19,7 +19,6 @@ namespace Agri_Energy_Connect.Controllers
         [HttpGet]
         public IActionResult Login()
         {
-            ViewData["HideNavbar"] = true;
             return View();
         }
 

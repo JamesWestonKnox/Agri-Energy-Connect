@@ -32,6 +32,9 @@
                     <td>@product.Description</td>
                     <td>@product.ProductionDate.ToLongDateString()</td>
                     <td>R @product.Price</td>
+                    <td>
+                        <a class="btn btn-primary mb-3" href="/Farmer/EditProduct/@product.ProductId">Edit Product</a>
+                    </td>
                 </tr>
             }
         }
