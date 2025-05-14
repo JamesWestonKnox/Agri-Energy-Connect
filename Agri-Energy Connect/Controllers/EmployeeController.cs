@@ -85,7 +85,7 @@ namespace Agri_Energy_Connect.Controllers
                 var existingUser = _context.Users.FirstOrDefault(u => u.Username == model.Username);
                 if (existingUser != null)
                 {
-                    ModelState.AddModelError("", "Username already exists.");
+                    ModelState.AddModelError(nameof(model.Username), "Username already exists.");
                     return View(model);
                 }
 
