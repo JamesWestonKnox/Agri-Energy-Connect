@@ -5,91 +5,101 @@
 }
 
 <div class="container py-5">
-    <div class="text-center mb-5 pb-3">
-        <h1 class="display-4">Available Products</h1>
-    </div>
-
-    <div class="card shadow mb-4">
-        <div class="card-body">
-            <form method="get">
-                <div class="row">
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="SelectedCategory">Category</label>
-                            <select id="SelectedCategory" name="SelectedCategory" class="form-control">
-                                <option value="">All Categories</option>
-                                @foreach (var category in Model.Categories)
-                                {
-                                    <option value="@category">@category</option>
-                                }
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="StartDate">Start Date</label>
-                            <input type="date" id="StartDate" name="StartDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="EndDate">End Date</label>
-                            <input type="date" id="EndDate" name="EndDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
-                        </div>
-                    </div>
+    <div class="row justify-content-center mb-5 pb-3">
+        <div class="col-md-10">
+            <div class="card shadow-sm text-center p-4">
+                <div class="card-body">
+                    <h1 class="display-4">Available Products</h1>
                 </div>
-
-                <div class="mt-3 text-end">
-                    <button type="submit" class="btn btn-primary">Filter</button>
-                </div>
-            </form>
+            </div>
         </div>
     </div>
 
-    <div class="card shadow">
-        <div class="card-body">
-            @if (Model.Products.Any())
-            {
-                <table class="table">
-                    <thead>
-                        <tr>
-                            <th>Product Name</th>
-                            <th>Category</th>
-                            <th>Description</th>
-                            <th>Production Date</th>
-                            <th>Price</th>
-                            <th>Farmer</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var product in Model.Products)
-                        {
-                            <tr>
-                                <td>@product.Name</td>
-                                <td>@product.Category</td>
-                                <td>@product.Description</td>
-                                <td>@product.ProductionDate.ToString("yyyy-MM-dd")</td>
-                                <td>R @product.Price.ToString("N2")</td>
-                                <td>@product.Farmer?.FirstName @product.Farmer?.LastName</td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
-            }
-            else
-            {
-                <p>No products found with the selected filters.</p>
-            }
+    <div class="row justify-content-center mb-4">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <form method="get">
+                        <div class="row">
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label for="SelectedCategory">Category</label>
+                                    <select id="SelectedCategory" name="SelectedCategory" class="form-control">
+                                        <option value="">All Categories</option>
+                                        @foreach (var category in Model.Categories)
+                                        {
+                                            <option value="@category">@category</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label for="StartDate">Start Date</label>
+                                    <input type="date" id="StartDate" name="StartDate" class="form-control" value="@Model.StartDate?.ToString("yyyy-MM-dd")" />
+                                </div>
+                            </div>
+
+                            <div class="col-md-4 mb-3">
+                                <div class="form-group">
+                                    <label for="EndDate">End Date</label>
+                                    <input type="date" id="EndDate" name="EndDate" class="form-control" value="@Model.EndDate?.ToString("yyyy-MM-dd")" />
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-3 text-end">
+                            <button type="submit" class="btn btn-primary">Filter</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row justify-content-center">
+        <div class="col-md-10">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    @if (Model.Products.Any())
+                    {
+                        <table class="table table-bordered table-striped table-hover">
+                            <thead>
+                                <tr>
+                                    <th>Product Name</th>
+                                    <th>Category</th>
+                                    <th>Description</th>
+                                    <th>Production Date</th>
+                                    <th>Price</th>
+                                    <th>Farmer</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var product in Model.Products)
+                                {
+                                    <tr>
+                                        <td>@product.Name</td>
+                                        <td>@product.Category</td>
+                                        <td>@product.Description</td>
+                                        <td>@product.ProductionDate.ToString("yyyy-MM-dd")</td>
+                                        <td>R @product.Price.ToString("N2")</td>
+                                        <td>@product.Farmer?.FirstName @product.Farmer?.LastName</td>
+                                    </tr>
+                                }
+                            </tbody>
+                        </table>
+                    }
+                    else
+                    {
+                        <p class="text-center">No products found with the selected filters.</p>
+                    }
+                </div>
+            </div>
         </div>
     </div>
 </div>
 
-<!--
-    Script to keep selected category updated in box.
-    Script given by ChatGpt
--->
+<!-- Script to Keep Category Selection Updated -->
 <script type="text/javascript">
     document.addEventListener("DOMContentLoaded", function () {
         var selectedCategory = "@Model.SelectedCategory";

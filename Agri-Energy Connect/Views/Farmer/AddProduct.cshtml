@@ -5,24 +5,29 @@
 }
 
 <div class="container py-5">
-    <div class="text-center mb-5 pb-3">
-        <h1 class="display-4">Add Product</h1>
+    <div class="row justify-content-center mb-5 pb-3">
+        <div class="col-md-8">
+            <div class="card shadow-sm text-center p-4">
+                <div class="card-body">
+                    <h1 class="display-4">Add Product</h1>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card shadow">
+            <div class="card shadow-sm">
                 <div class="card-body">
                     <form asp-action="AddProduct" method="post">
                         <div class="form-group mb-3">
-                            <label>Product Name</label>
-                            <input asp-for="Name" class="form-control" />
+                            <label for="Name">Product Name</label>
+                            <input asp-for="Name" class="form-control" id="Name" />
                             <span asp-validation-for="Name" class="text-danger"></span>
                         </div>
-
                         <div class="form-group mb-3">
-                            <label>Category</label>
-                            <select asp-for="Category" class="form-control">
+                            <label for="Category">Category</label>
+                            <select asp-for="Category" class="form-control" id="Category">
                                 <option value="">-- Select Category --</option>
                                 @foreach (var category in categories)
                                 {
@@ -31,25 +36,21 @@
                             </select>
                             <span asp-validation-for="Category" class="text-danger"></span>
                         </div>
-
                         <div class="form-group mb-3">
-                            <label>Description</label>
-                            <textarea asp-for="Description" class="form-control" rows="4"></textarea>
+                            <label for="Description">Description</label>
+                            <textarea asp-for="Description" class="form-control" rows="4" id="Description"></textarea>
                             <span asp-validation-for="Description" class="text-danger"></span>
                         </div>
-
                         <div class="form-group mb-3">
-                            <label>Production Date</label>
-                            <input asp-for="ProductionDate" class="form-control" type="date" />
+                            <label for="ProductionDate">Production Date</label>
+                            <input asp-for="ProductionDate" class="form-control" type="date" id="ProductionDate" />
                             <span asp-validation-for="ProductionDate" class="text-danger"></span>
                         </div>
-
                         <div class="form-group mb-3">
-                            <label>Price (R)</label>
-                            <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" />
+                            <label for="Price">Price (R)</label>
+                            <input asp-for="Price" class="form-control" type="number" step="0.01" min="0" id="Price" />
                             <span asp-validation-for="Price" class="text-danger"></span>
                         </div>
-
                         <div class="text-end">
                             <button type="submit" class="btn btn-primary">Add Product</button>
                         </div>

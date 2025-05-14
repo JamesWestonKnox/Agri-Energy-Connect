@@ -4,16 +4,20 @@
 }
 
 <div class="container py-5">
-    <div class="text-center mb-5 pb-3">
-        <h1 class="display-4">My Products</h1>
+    <div class="row justify-content-center mb-5 pb-3">
+        <div class="col-md-8">
+            <div class="card shadow-sm text-center p-4">
+                <div class="card-body">
+                    <h1 class="display-4">My Products</h1>
+                </div>
+            </div>
+        </div>
     </div>
-
-    <div class="mb-4 text-end">
-        <a class="btn btn-primary" href="/Farmer/AddProduct">Add New Product</a>
-    </div>
-
-    <div class="card shadow">
+    <div class="card shadow-sm">
         <div class="card-body">
+            <div class="mb-4 text-end">
+                <a class="btn btn-primary" href="/Farmer/AddProduct">Add New Product</a>
+            </div>
             @if (!Model.Any())
             {
                 <p>No products found.</p>
@@ -21,7 +25,7 @@
             else
             {
                 <table class="table table-bordered table-striped">
-                    <thead>
+                    <thead class="thead-light">
                         <tr>
                             <th>Name</th>
                             <th>Category</th>
