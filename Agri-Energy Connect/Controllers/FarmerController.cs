@@ -1,4 +1,12 @@
-﻿using Agri_Energy_Connect.Data;
+﻿// Summary
+//----------------------------------------------------
+// AccountController.cs
+// Handles user login and logout functionality.
+// Routes users based on role (Employee or Farmer).
+// Depends on: AppDbContext, PasswordService, Session
+// ---------------------------------------------------
+
+using Agri_Energy_Connect.Data;
 using Agri_Energy_Connect.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -57,7 +65,7 @@ namespace Agri_Energy_Connect.Controllers
                 products = products.Where(p => p.ProductionDate <= filter.EndDate.Value);
             }
 
-            var filteredProducts = products.ToList();
+            var filteredProducts = products.Include(p => p.Farmer).ToList();
 
             filter.Products = filteredProducts;
             return View(filter);
@@ -118,3 +126,5 @@ namespace Agri_Energy_Connect.Controllers
 
     }
 }
+
+// ============================== End Of FILE ============================== //

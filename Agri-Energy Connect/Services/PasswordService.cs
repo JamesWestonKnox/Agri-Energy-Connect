@@ -1,4 +1,12 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿// Summary
+//----------------------------------------------------
+// AccountController.cs
+// Handles user login and logout functionality.
+// Routes users based on role (Employee or Farmer).
+// Depends on: AppDbContext, PasswordService, Session
+// ---------------------------------------------------
+
+using Microsoft.AspNetCore.Identity;
 
 namespace Agri_Energy_Connect.Services
 {
@@ -18,3 +26,5 @@ namespace Agri_Energy_Connect.Services
         }
     }
 }
+
+// ============================== End Of FILE ============================== //
