@@ -1,4 +1,4 @@
-﻿@model Agri_Energy_Connect.Models.Product
+﻿@model Agri_Energy_Connect.Models.AddProductModel
 @{
     ViewData["Title"] = "Add Product";
     var categories = new List<string> { "Solar energy", "Wind energy", "Bio energy", "Electric machinery", "Sustainable farming materials" };
@@ -60,4 +60,6 @@
     </div>
 </div>
 
-
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+}

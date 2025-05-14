@@ -4,19 +4,21 @@ namespace Agri_Energy_Connect.Models
 {
     public class AddProductModel
     {
-        [Required]
+        [Required(ErrorMessage = "Product name is required.")]
         public string Name { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Please select a category.")]
         public string Category { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "A description is required.")]
         public string Description { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Enter a production date.")]
+        [DataType(DataType.Date)]
         public DateTime ProductionDate { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Price is required.")]
+        [Range(0.01, double.MaxValue, ErrorMessage = "Price must be a positive number.")]
         public double Price { get; set; }
     }
 }
