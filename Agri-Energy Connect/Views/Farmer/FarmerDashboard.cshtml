@@ -2,6 +2,34 @@
     ViewData["Title"] = "Farmer Dashboard";
 }
 
-<h2>Welcome to the Farmer Dashboard</h2>
+<div class="container py-5">
+    <div class="text-center mb-5 pb-3">
+        <h1 class="display-4">Welcome to your farmer dashboard</h1>
+        <p class="lead">Manage farmers and products in one simple dashboard</p>
+    </div>
 
-<p>This is your dashboard</p>
+    <div class="row justify-content-center gx-5">
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title mb-3">Marketplace</h3>
+                    <p class="mb-4">Find available products to purchase</p>
+                    <div class="d-grid">
+                        <a href="/Farmer/Marketplace" class="btn btn-primary">View marketplace</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title mb-3">Your products</h3>
+                    <p class="mb-4">Create and edit your own product listings</p>
+                    <div class="d-grid">
+                        <a href="/Farmer/Products" class="btn btn-primary">Manage products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

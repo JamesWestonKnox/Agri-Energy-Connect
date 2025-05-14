@@ -2,6 +2,34 @@
     ViewData["Title"] = "Employee Dashboard";
 }
 
-<h2>Welcome to the Employee Dashboard</h2>
+<div class="container py-5">
+    <div class="text-center mb-5 pb-3">
+        <h1 class="display-4">Welcome to your employee dashboard</h1>
+        <p class="lead">Manage farmers and products in one simple dashboard</p>
+    </div>
 
-<p>This is your dashboard where you can manage farmers, view reports, etc.</p>
+    <div class="row justify-content-center gx-5">
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title mb-3">Products Management</h3>
+                    <p class="mb-4">View and manage all products</p>
+                    <div class="d-grid">
+                        <a href="/Employee/Products" class="btn btn-primary">Manage Products</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-5">
+            <div class="card shadow-sm border-0">
+                <div class="card-body text-center p-4">
+                    <h3 class="card-title mb-3">Farmers Management</h3>
+                    <p class="mb-4">Create and edit farmer profiles</p>
+                    <div class="d-grid">
+                        <a href="/Employee/Farmers" class="btn btn-primary">Manage Farmers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

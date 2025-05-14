@@ -2,6 +2,7 @@
 using Agri_Energy_Connect.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 namespace Agri_Energy_Connect.Controllers
 {
@@ -35,6 +36,12 @@ namespace Agri_Energy_Connect.Controllers
             }
 
             return View(farmer.Products.ToList());
+        }
+
+        [HttpGet]
+        public IActionResult Marketplace() 
+        {
+            return View();
         }
 
         [HttpGet]
